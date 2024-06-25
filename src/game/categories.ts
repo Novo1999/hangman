@@ -10,17 +10,18 @@ const BUTTON_TYPES = ['btn-info', 'btn-success', 'btn-warning', 'btn-error']
 
 class Categories {
   categories: string[]
+  categoryData: typeof parsedData
   loadCategories: () => void
   generateRandomButton: () => string
   selectCategory: () => void
   constructor(data: { categories: string[] }) {
     this.categories = Object.keys(data.categories)
+    this.categoryData = data.categories
     this.generateRandomButton = function () {
       return BUTTON_TYPES[generateRandomNums(0, BUTTON_TYPES.length)]
     }
     this.loadCategories = function () {
       const categorySelector = document.querySelector('.categories')
-
       categorySelector!.innerHTML = this.categories
         .map((category) => {
           return `<button class="btn btn-category ${this.generateRandomButton()}">${category}</button>`

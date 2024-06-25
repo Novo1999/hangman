@@ -16,7 +16,7 @@
         <div class="categories gap-2 mt-4 flex"></div>
       </section>
       <!-- navbar -->
-      <section class="hidden game">
+      <section class="game hidden">
         <nav class="flex items-center justify-between">
           <div class="flex gap-6 items-center">
             <button class="btn text-white">
@@ -37,7 +37,7 @@
           </div>
         </nav>
         <!-- words -->
-        <section class="mt-6 p-2 grid grid-cols-12 gap-6">
+        <section class="mt-6 p-2 grid grid-cols-12 gap-6 mystery-word">
           <div class="rounded-xl p-10 size-20 bg-blue-500 opacity-50"></div>
           <div
             class="rounded-xl size-20 bg-blue-500 flex justify-center items-center text-5xl"
@@ -45,9 +45,11 @@
             U
           </div>
         </section>
+        <p class="mt-12 mb-4">CHOOSE LETTER HERE</p>
+        <section class="grid grid-cols-12 gap-4 keyboard"></section>
       </section>
     </main>
-    <script type="module" src="/src/view/main.ts"></script>
+    <script type="module" src="/src/game/main.ts"></script>
     <script
       src="https://kit.fontawesome.com/6492e2f6ac.js"
       crossorigin="anonymous"
