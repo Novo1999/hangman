@@ -1,0 +1,84 @@
+{
+  "categories": {
+    "Animals": [
+      "Elephant",
+      "Giraffe",
+      "Kangaroo",
+      "Penguin",
+      "Crocodile",
+      "Dolphin",
+      "Hippopotamus",
+      "Chameleon"
+    ],
+    "Countries": [
+      "Argentina",
+      "Brazil",
+      "Canada",
+      "Denmark",
+      "Egypt",
+      "Finland",
+      "Germany",
+      "Hungary"
+    ],
+    "Fruits": [
+      "Apple",
+      "Banana",
+      "Cherry",
+      "Date",
+      "Elderberry",
+      "Fig",
+      "Grape",
+      "Honeydew"
+    ],
+    "Movies": [
+      "Inception",
+      "Titanic",
+      "Avatar",
+      "Gladiator",
+      "Up",
+      "Coco",
+      "Braveheart",
+      "Jaws"
+    ],
+    "Sports": [
+      "Soccer",
+      "Basketball",
+      "Cricket",
+      "Hockey",
+      "Tennis",
+      "Baseball",
+      "Golf",
+      "Rugby"
+    ],
+    "Jobs": [
+      "Doctor",
+      "Engineer",
+      "Teacher",
+      "Artist",
+      "Lawyer",
+      "Chef",
+      "Nurse",
+      "Carpenter"
+    ],
+    "Books": [
+      "Pride and Prejudice",
+      "1984",
+      "Moby Dick",
+      "Hamlet",
+      "The Hobbit",
+      "Dracula",
+      "War and Peace",
+      "Ulysses"
+    ],
+    "Science": [
+      "Physics",
+      "Chemistry",
+      "Biology",
+      "Geology",
+      "Astronomy",
+      "Ecology",
+      "Genetics",
+      "Meteorology"
+    ]
+  }
+}
