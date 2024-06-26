@@ -7,6 +7,7 @@ class GamePlayer {
   updateKeyboard: () => void
   updateMysteryWord: () => void
   endGame: () => void
+  resetEverything: () => void
   matchedLetters: string[]
   constructor() {
     this.matchedLetters = []
@@ -54,10 +55,7 @@ class GamePlayer {
 
       keyboardButtons.forEach((btn) => {
         btn.addEventListener('click', (btn: any) => {
-          console.log(state.gameWord)
           const letter = btn.target.innerText.toLowerCase()
-
-          console.log(state.selectedLetters)
 
           if (!state.gameWord.includes(letter.toLowerCase())) {
             state.selectedLetters.add(letter)
@@ -109,23 +107,26 @@ class GamePlayer {
       const restartButton = document.querySelector('.restart-button')
 
       restartButton?.addEventListener('click', () => {
-        const game: HTMLElement = document.querySelector('.game') as HTMLElement
-        const menu: HTMLElement = document.querySelector('.menu') as HTMLElement
-
-        game.classList.replace('block', 'hidden')
-        menu.classList.replace('hidden', 'block')
-
-        resetState()
-        this.matchedLetters = []
-        const health: any = document.querySelector('.range')
-        health.value = 80
-
-        // load categories
-        categories.loadCategories()
-
-        // select categories
-        categories.selectCategory()
+        this.resetEverything()
       })
+    }
+    this.resetEverything = function () {
+      const game: HTMLElement = document.querySelector('.game') as HTMLElement
+      const menu: HTMLElement = document.querySelector('.menu') as HTMLElement
+
+      game.classList.replace('block', 'hidden')
+      menu.classList.replace('hidden', 'block')
+
+      resetState()
+      this.matchedLetters = []
+      const health: any = document.querySelector('.range')
+      health.value = 80
+
+      // load categories
+      categories.loadCategories()
+
+      // select categories
+      categories.selectCategory()
     }
   }
 }
