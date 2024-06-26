@@ -1,10 +1,12 @@
+import { categories } from './categories'
 import { generateAlphabets } from './gameLoader'
-import { state } from './state'
+import { resetState, state } from './state'
 
 class GamePlayer {
   selectLetter: () => void
   updateKeyboard: () => void
   updateMysteryWord: () => void
+  endGame: () => void
   matchedLetters: string[]
   constructor() {
     this.matchedLetters = []
@@ -33,7 +35,7 @@ class GamePlayer {
           const matched = this.matchedLetters.find((ltr2) => ltr1 === ltr2)
           if (matched) {
             return `
-          <div class="rounded-xl p-10 size-20 bg-blue-500 opacity-100">${matched}</div>
+          <div class="rounded-xl p-10 flex justify-center items-center text-3xl size-20 bg-blue-500 opacity-100 uppercase">${matched}</div>
           `
           } else {
             return `
@@ -45,6 +47,9 @@ class GamePlayer {
       mysteryWordDOMElement!.innerHTML = updatedMysteryWord
     }
     this.selectLetter = function () {
+      if (this.matchedLetters.join('') === state.gameWord) {
+        this.endGame()
+      }
       const keyboardButtons = document.querySelectorAll('.keyboard-btn')
 
       keyboardButtons.forEach((btn) => {
@@ -61,6 +66,10 @@ class GamePlayer {
             // lower health by 10 if player chooses wrong letter
             health.value = health.value -= 10
 
+            if (Number(health.value) === 0) {
+              this.endGame()
+            }
+
             this.updateKeyboard()
             this.selectLetter()
           } else {
@@ -74,6 +83,48 @@ class GamePlayer {
             this.updateMysteryWord()
           }
         })
+      })
+    }
+    this.endGame = function () {
+      const overlay = document.querySelector('.overlay')
+
+      overlay!.innerHTML = `
+      <dialog id="end_game_modal" class="modal">
+        <div class="modal-box">
+          <h3 class="text-lg font-bold">Game Over!</h3>
+          <p class="py-4">You lost the game</p>
+          <div class="modal-action">
+            <form method="dialog">
+              <button class="btn restart-button btn-primary">Restart</button>
+            </form>
+          </div>
+        </div>
+      </dialog>`
+
+      const endGameModal: any = document.getElementById('end_game_modal')
+
+      // daisy ui way to open a modal
+      endGameModal.showModal()
+
+      const restartButton = document.querySelector('.restart-button')
+
+      restartButton?.addEventListener('click', () => {
+        const game: HTMLElement = document.querySelector('.game') as HTMLElement
+        const menu: HTMLElement = document.querySelector('.menu') as HTMLElement
+
+        game.classList.replace('block', 'hidden')
+        menu.classList.replace('hidden', 'block')
+
+        resetState()
+        this.matchedLetters = []
+        const health: any = document.querySelector('.range')
+        health.value = 80
+
+        // load categories
+        categories.loadCategories()
+
+        // select categories
+        categories.selectCategory()
       })
     }
   }
