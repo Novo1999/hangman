@@ -19,10 +19,13 @@ class GameLoader {
     this.setRandomWordFromCategory = function (category) {
       const selectedCategoryWords = categories.categoryData[category]
 
-      state.gameWord =
-        categories.categoryData[category][
-          generateRandomNums(0, selectedCategoryWords.length)
-        ].toLowerCase()
+      state.gameWord = categories.categoryData[category][
+        generateRandomNums(0, selectedCategoryWords.length)
+      ]
+        .toLowerCase()
+        .split('')
+        .filter((ltr: string) => ltr !== ' ')
+        .join('')
     }
     this.loadGame = function () {
       const menu: HTMLElement = document.querySelector('.menu') as HTMLElement
@@ -35,13 +38,14 @@ class GameLoader {
         menu.classList.add('hidden')
         game.classList.replace('hidden', 'block')
         currentCategory.innerText = state.selectedCategory
-        const mysteryWordDOMElement = document.querySelector('.mystery-word')
 
-        mysteryWordDOMElement!.innerHTML = state.gameWord
-          .split('')
-          .map((ltr) => {
+        const mysteryWordDOMElement = document.querySelector('.mystery-word')
+        const gameWordArray = state.gameWord.split('')
+
+        mysteryWordDOMElement!.innerHTML = gameWordArray
+          .map(() => {
             return `
-          <div class="rounded-xl p-10 size-20 bg-blue-500 opacity-50">${ltr}</div>
+          <div class="rounded-xl p-10 size-20 bg-blue-500 opacity-50"></div>
           `
           })
           .join('')
